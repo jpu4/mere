@@ -10,17 +10,14 @@ class config {
     public static bool $Debug = true;
     public static ?string $Env = 'dev';
     // SITE
-    public static ?string $Site_Name = 'twig1';
+    public static ?string $Site_Name = 'A Mere site';
     public static ?string $Site_Baseurl = 'http://mere.jfa.lan';
-    public static ?string $Site_Theme = 'twentytwenty';
     public static ?string $DateTime_Format = 'Y-m-d H:i:s';         //date('Y-m-d H:i:s')
     public static ?string $DateTime_Io = 'Ymd-His';                 //date('Ymd-His')
     public static ?string $Site_Key = '0qY4reOLFH4nPGahkDbWuUdXL6O2/8k8sulz91SE8MU=';
     // PATH
     public static ?string $DIR_Config = '/config';
-    public static ?string $DIR_Themes = '/themes';
-    public static ?string $DIR_Images = '/images';
-    public static ?string $DIR_Pages = '/pages';
+    public static ?string $DIR_Images = '/assets';
     public static ?string $DIR_Composer = '/vendor';
     // MAIL
     public static ?string $Mail_Type = 'smtp';
@@ -46,14 +43,8 @@ class config {
             case 'config':
                 return $root . self::$DIR_Config . '/';
             break;
-            case 'themes':
-                return $root . self::$DIR_Themes . '/';
-            break;
-            case 'images':
+            case 'assets':
                 return $root . self::$DIR_Images . '/';
-            break;
-            case 'pages':
-                return $root . self::$DIR_Pages . '/';
             break;
             case 'composer':
                 return $root . self::$DIR_Composer . '/';
@@ -62,11 +53,6 @@ class config {
         
     }
 
-    public static function getThemePath($type='abs'){
-
-        return self::getPath('themes',$type).self::$Site_Theme;
-
-    }
 
 }
 ?>
