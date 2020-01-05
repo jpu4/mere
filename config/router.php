@@ -33,7 +33,7 @@ function renderTemplate($file, array $params = array()){
 }
 
 function pageExists($url){
-    if ($url == '/'){ $url='/index'; }
+    if ($url == '/'){ $url='/home'; }
     
     $url = trim($url,'/');
 
@@ -44,11 +44,12 @@ function pageExists($url){
     }
 }
 
+echo pageExists($user_request);
 if (is_null(pageExists($user_request))){ 
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
     require_once(pageExists('/404'));
     die;
 } else {
-    renderTemplate('base.twig', $twigvars);
+    renderTemplate(pageExists($user_request), $twigvars);
     
 }
