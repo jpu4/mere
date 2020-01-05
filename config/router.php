@@ -18,13 +18,6 @@ if ($user_request=='/'){
     $pagename = ucwords(str_replace('_',' ',str_replace('-',' ',trim($user_request,'/'))));  // converts "/about-us" to "About Us"
 };
 
-$twigvars = array(
-    'page' => array(
-        'sitename' => $config::$Site_Name,
-        'name' => $pagename
-    )
-);
-
 function renderTemplate($file, array $params = array()){
 	$loader = new \Twig\Loader\FilesystemLoader('/');
 	//$twig = new Environment($loader, array('cache' => __DIR__ . '/cache'));
@@ -44,12 +37,18 @@ function pageExists($url){
     }
 }
 
-echo pageExists($user_request);
 if (is_null(pageExists($user_request))){ 
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    require_once(pageExists('/404'));
+    renderTemplate(pageExists('/404'),array('page' => array('sitename' => $config::$Site_Name,'name' => '404')));
     die;
 } else {
+    
+    $twigvars = array(
+        'page' => array(
+            'sitename' => $config::$Site_Name,
+            'name' => $pagename
+        )
+    );
     renderTemplate(pageExists($user_request), $twigvars);
     
 }
