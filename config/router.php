@@ -39,14 +39,20 @@ function pageExists($url){
 
 if (is_null(pageExists($user_request))){ 
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    renderTemplate(pageExists('/404'),array('page' => array('sitename' => $config::$Site_Name,'name' => '404')));
+    renderTemplate(pageExists('/404'),array('page' => array('name' => '404'), 'site' => array('name' => $config::$Site_Name)));
     die;
 } else {
     
     $twigvars = array(
         'page' => array(
-            'sitename' => $config::$Site_Name,
             'name' => $pagename
+        ),
+        'site' => array(
+            'name' => $config::$Site_Name
+        ),
+        'mail' => array(
+            'to' => $config::$Mail_SendTo,
+            'from' => $config::$Mail_Sendfrom
         )
     );
     renderTemplate(pageExists($user_request), $twigvars);
