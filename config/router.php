@@ -5,8 +5,6 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
 $config = new config;
-//$Path_Theme = $config->getThemePath();
-//$Path_Pages = $config->getPath('pages','abs');
 $pagename='';
 
 $uri = explode('?', $_SERVER['REQUEST_URI'], 2);
@@ -26,8 +24,8 @@ function renderTemplate($file, array $params = array()){
 }
 
 function pageExists($url){
+    // Find files that match url request from user
     if ($url == '/'){ $url='/home'; }
-    
     $url = trim($url,'/');
 
     foreach (array('.php','.htm','.html','.twig') as $ext){
@@ -38,23 +36,22 @@ function pageExists($url){
 }
 
 if (is_null(pageExists($user_request))){ 
+    // Content page was not found, show 404
     header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
-    renderTemplate(pageExists('/404'),array('page' => array('name' => '404'), 'site' => array('name' => $config::$Site_Name)));
-    die;
-} else {
-    
-    $twigvars = array(
-        'page' => array(
-            'name' => $pagename
-        ),
-        'site' => array(
-            'name' => $config::$Site_Name
-        ),
-        'mail' => array(
-            'to' => $config::$Mail_SendTo,
-            'from' => $config::$Mail_Sendfrom
-        )
+    renderTemplate(pageExists('/404'),[
+        'page' => array('name' => '404'), 
+        'site' => array('name' => $config::$Site_Name)
+        ]
     );
-    renderTemplate(pageExists($user_request), $twigvars);
+    die;
+
+} else {
+    // Load Content pages as twig templates and share data
+    renderTemplate(pageExists($user_request), [
+        'page' => array('name' => $pagename),
+        'site'=>$config->getSiteInfo(),
+        'owner'=>$config->getOwnerInfo()
+        ]
+    );
     
 }

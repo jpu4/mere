@@ -17,6 +17,14 @@ class config {
     public static ?string $DateTime_Format = 'Y-m-d H:i:s';         //date('Y-m-d H:i:s')
     public static ?string $DateTime_Io = 'Ymd-His';                 //date('Ymd-His')
     public static ?string $Site_Key = '0qY4reOLFH4nPGahkDbWuUdXL6O2/8k8sulz91SE8MU=';
+    // OWNER
+    public static ?string $Owner_Address1 = '123 Fiscal St';
+    public static ?string $Owner_Address2 = 'BLDG A';
+    public static ?string $Owner_CityStateZip = 'Dallas, TX 77777';
+    public static ?string $Owner_Phone = '123.123.1234';
+    public static ?string $Owner_Mobile = '123.123.1234';
+    public static ?string $Owner_Hours = 'Monday - Friday: 9:00 AM to 5:00 PM';
+
     // PATH
     public static ?string $DIR_Config = '/config';
     public static ?string $DIR_Images = '/assets';
@@ -30,18 +38,34 @@ class config {
     public static ?string $Mail_SendTo = 'emailme@domain.com';
     public static ?string $Mail_Sendfrom = 'contactform@domain.com';
     public static ?string $Mail_Supportemail = 'support@mach.us';
-    // OWNER
-    public static ?string $Owner_Address1 = '';
-    public static ?string $Owner_Address2 = '';
-    public static ?string $Owner_CityStateZip = '';
-    public static ?string $Owner_Phone = '';
-    public static ?string $Owner_Mobile = '';
-    public static ?string $Owner_Hours = '';
-
     // BACKUP
     public static ?string $Backup_Host = '';
     public static ?string $Backup_Username = '';
     public static ?string $Backup_Password = '';
+
+    public static function getOwnerInfo(){
+        $owner_info = array(
+            'address1' => self::$Owner_Address1,
+            'address2' => self::$Owner_Address2,
+            'citystatezip' => self::$Owner_CityStateZip,
+            'phone' => self::$Owner_Phone,
+            'mobile' => self::$Owner_Mobile,
+            'hours' => self::$Owner_Hours,
+            'email' => self::$Mail_SendTo
+        );
+        return $owner_info;
+    }
+    
+    public static function getSiteInfo(){
+        $site_info = array(
+            'name' => self::$Site_Name,
+            'author' => self::$Site_Author,
+            'description' => self::$Site_Descr,
+            'baseurl' => self::$Site_Baseurl,
+            'key' => self::$Site_Key
+        );
+        return $site_info;
+    }
 
     public static function getPath($which,$type='http'){
         $root='';

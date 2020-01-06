@@ -1,5 +1,5 @@
 <?php
 // Load init
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/init.php';
-
+require_once 'config/init.php';
+require 'assets/mail/contact_me.php';
 ?>
