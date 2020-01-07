@@ -1,3 +1,4 @@
+<?php $pagename = ucwords(trim('/',$_SERVER['REQUEST_URI'])); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,7 @@
   <meta name="description" content="{{ site.description }}">
   <meta name="author" content="{{ site.author }}">
 
-  <title>{{ site.name }} - {{ page.name }}</title>
+  <title><?php echo $config::$SITE_name . ' - ' . $pagename;?></title>
 
   <!-- Bootstrap core CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -16,13 +17,10 @@
   <!-- Custom styles for this template -->
   <link href="assets/css/modern-business.css" rel="stylesheet">
 
-  {% block headjs %}
-  
-  {% endblock headjs %}
 </head>
 
 <body>
-  {% block nav %}
+  
   <!-- Navigation -->
 <header>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -44,16 +42,12 @@
     </div>
   </nav>
 </header>
-  {% endblock %}
 
-  {% block slider %}
-  {% endblock %}
-  
   <!-- Page Content -->
   <div class="container" style="margin-top: 60px;">
 
     <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">{{ page.name }}
+    <h1 class="mt-4 mb-3"><?php echo $pagename; ?>
       <small>Subheading</small>
     </h1>
 
@@ -61,35 +55,8 @@
       <li class="breadcrumb-item">
         <a href="/">Home</a>
       </li>
-      <li class="breadcrumb-item active">{{ page.name }}</li>
+      <li class="breadcrumb-item active"><?php echo $pagename; ?></li>
     </ol>
     
   <!-- Page Content -->
   <div class="container">
-    {% block content %}
-    {% endblock %}
-  </div>
-  <!-- /.container -->
-    <!-- content end-->
-
-  </div>
-  <!-- end page content -->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; {{ site.name }} 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
-  {% block footjs %}
-  
-  {% endblock footjs %}
-</body>
-
-</html>

@@ -46,12 +46,14 @@ if (is_null(pageExists($user_request))){
     die;
 
 } else {
-    // Load Content pages as twig templates and share data
-    renderTemplate(pageExists($user_request), [
-        'page' => array('name' => $pagename),
-        'site'=>$config->getSiteInfo(),
-        'owner'=>$config->getOwnerInfo()
-        ]
-    );
+
+        $twigvars=[
+            'page' => array('name' => $pagename),
+            'site' => $config->getSiteInfo(),
+            'owner' => $config->getOwnerInfo()
+        ];
+        // Load Content pages as twig templates and share data
+        renderTemplate(pageExists($user_request), $twigvars);
+
     
 }
