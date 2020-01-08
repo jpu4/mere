@@ -80,7 +80,7 @@ if($sent){
 </header>
 
   <!-- Page Content -->
-  <div class="container" style="margin-top: 60px;">
+  <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
     <h1 class="mt-4 mb-3"><?php echo $pagename; ?>
