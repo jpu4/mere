@@ -5,15 +5,11 @@ $config = new config;
 $MailMessage = '';
 $MailMessageClass = '';
 $pagename = 'Contact';
-// Check for empty fields
+
 $sent = isset($_POST['sent']) ? $_POST['sent'] : null;
-echo "BEFORE IF STATEMENT";
-var_dump($_POST);
 
 if($sent){
   
-echo "INSIDE IF STATEMENT";
-  var_dump($_POST);
   $name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
   $email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
   $phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
@@ -25,7 +21,7 @@ echo "INSIDE IF STATEMENT";
   $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
   $headers = "From: ". $config::$Mail_Sendfrom . "\n"; // This is the email address the message will be from. 
   $headers .= "Reply-To: " . $config::$Mail_SendTo;   
-  echo "mail - $to,$email_subject,$email_body,$headers";
+  mail($to,$email_subject,$email_body,$headers);
 
   $MailMessage = 'Mail Sent. Thank you.';
   $MailMessageClass = 'success';
@@ -127,7 +123,7 @@ echo "INSIDE IF STATEMENT";
     <div class="row">
       <div class="col-lg-8 mb-4">
         <h3>Send us a Message</h3>
-        <form name="contactForm" id="contactForm" method="POST" novalidate>
+        <form name="contactForm" id="contactForm" method="POST" action="contact.php" novalidate>
           <input type="hidden" name="sent" value="1" />
           <div class="control-group form-group">
             <div class="controls">
@@ -154,10 +150,9 @@ echo "INSIDE IF STATEMENT";
               <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
             </div>
           </div>
-          <div id="success"></div>
+          <!--<div id="success"></div>-->
           <div id="mailmessage" class="alert alert-<?php echo $MailMessageClass ;?>"><?php echo $MailMessage ;?> </div>
           <!-- For success/fail messages -->
-          <!--<button type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit">Send Message</button>-->
           <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Send Message">
         </form> 
       </div>
@@ -183,8 +178,6 @@ echo "INSIDE IF STATEMENT";
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
-<script src="assets/js/jqBootstrapValidation.js"></script>
-<script src="assets/js/contact_me.js"></script>
 
 </body>
 
