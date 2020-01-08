@@ -13,7 +13,7 @@ class config {
     public static ?string $Site_Name = 'A Mere site';
     public static ?string $Site_Author = 'James Ussery';
     public static ?string $Site_Descr = 'A Mere site';
-    public static ?string $Site_Baseurl = 'http://mere.jfa.lan';
+    public static ?string $Site_Baseurl = 'http://mere.site';
     public static ?string $DateTime_Format = 'Y-m-d H:i:s';         //date('Y-m-d H:i:s')
     public static ?string $DateTime_Io = 'Ymd-His';                 //date('Ymd-His')
     public static ?string $Site_Key = '0qY4reOLFH4nPGahkDbWuUdXL6O2/8k8sulz91SE8MU=';

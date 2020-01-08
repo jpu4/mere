@@ -1,3 +1,4 @@
+![Mere Logo](assets/images/logo.jpg)
 # Mere
 
 > Being nothing more nor better than.
