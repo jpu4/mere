@@ -52,6 +52,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="<?php echo $config::$Site_Descr; ?>">
   <meta name="author" content="<?php echo $config::$Site_Author; ?>">
+  <link rel="shortcut icon" type="image/png" href="/favicon.jpg"/>
 
   <title><?php echo $config::$Site_Name . ' - ' . $pagename; ?></title>
 
