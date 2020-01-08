@@ -1,6 +1,6 @@
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
-
+session_start(); // used for captcha
 $config = new config;
 $MailMessage = '';
 $MailMessageClass = '';
@@ -12,7 +12,11 @@ $email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['e
 $phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
 $message = (isset($_POST['message']) ? strip_tags(htmlspecialchars($_POST['message'])) : null);
 
-if($sent){
+//if($sent){
+  
+if(isset($_POST["captcha"]))  
+if($_SESSION["captcha"]==$_POST["captcha"])  
+{  
   
   if (empty($email_address)){
 
@@ -32,7 +36,11 @@ if($sent){
     $MailMessage = 'Mail Sent. Thank you.';
     $MailMessageClass = 'success';
   }
-}
+} else {  
+
+    $MailMessage = 'CAPTCHA Required. (Spam is no fun)';
+    $MailMessageClass = 'danger';
+} 
 ?>
 
 <!DOCTYPE html>
@@ -158,6 +166,11 @@ if($sent){
               <label>Message:</label>
               <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"><?php echo $message; ?></textarea>
             </div>
+          </div>
+          <div class="form-group">
+          <div class="col-sm-8 pull-left"><label for="pwd">Anti Spam code, Please Enter 3 Black Symbols</label>
+          <img src="assets/captcha/captcha.php" alt="captcha image" style="width:100px;"></div>
+          <div class="col-sm-4 pull-right"><input type="text" name="captcha" size="3″ maxlength="3″ class="form-control"></div>
           </div>
           <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Send Message">
         </form> 
