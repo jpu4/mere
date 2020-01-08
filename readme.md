@@ -30,3 +30,6 @@ Thanks to:
 * [BootstrapMade](https://bootstrapmade.com)
 * [ThemeWagon](https://themewagon.com)
 * [Romain Moro](https://github.com/c4ilus)
+
+## CHANGELOG
+* 20200108 - Couldn't get form to process from within twig (will work on this later.) Was able to get it working by breaking contact into it's own php file for processing.

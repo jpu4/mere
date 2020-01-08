@@ -7,24 +7,31 @@ $MailMessageClass = '';
 $pagename = 'Contact';
 
 $sent = isset($_POST['sent']) ? $_POST['sent'] : null;
+$name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
+$email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
+$phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
+$message = (isset($_POST['message']) ? strip_tags(htmlspecialchars($_POST['message'])) : null);
 
 if($sent){
   
-  $name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
-  $email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
-  $phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
-  $message = (isset($_POST['message']) ? strip_tags(htmlspecialchars($_POST['message'])) : null);
+  if (empty($email_address)){
 
-  // Create the email and send the message
-  $to =  $config::$Mail_SendTo; // Add your email address
-  $email_subject = "Contact Form Submitted by:  $name";
-  $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
-  $headers = "From: ". $config::$Mail_Sendfrom . "\n"; // This is the email address the message will be from. 
-  $headers .= "Reply-To: " . $config::$Mail_SendTo;   
-  mail($to,$email_subject,$email_body,$headers);
+    $MailMessage = 'Email address is required.';
+    $MailMessageClass = 'danger';
 
-  $MailMessage = 'Mail Sent. Thank you.';
-  $MailMessageClass = 'success';
+  } else {
+
+    // Create the email and send the message
+    $to =  $config::$Mail_SendTo; // Add your email address
+    $email_subject = "Contact Form Submitted by:  $name";
+    $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
+    $headers = "From: ". $config::$Mail_Sendfrom . "\n"; // This is the email address the message will be from. 
+    $headers .= "Reply-To: " . $config::$Mail_SendTo;   
+    mail($to,$email_subject,$email_body,$headers);
+
+    $MailMessage = 'Mail Sent. Thank you.';
+    $MailMessageClass = 'success';
+  }
 }
 ?>
 
@@ -125,34 +132,33 @@ if($sent){
         <h3>Send us a Message</h3>
         <form name="contactForm" id="contactForm" method="POST" action="contact.php" novalidate>
           <input type="hidden" name="sent" value="1" />
+          <!-- For success/fail messages -->
+          <div id="mailmessage" class="alert alert-<?php echo $MailMessageClass ;?>"><?php echo $MailMessage ;?> </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Full Name:</label>
-              <input type="text" class="form-control" id="name" name="name" required data-validation-required-message="Please enter your name.">
+              <input type="text" class="form-control" id="name" name="name" required data-validation-required-message="Please enter your name." value="<?php echo $name; ?>">
               <p class="help-block"></p>
             </div>
           </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Phone Number:</label>
-              <input type="tel" class="form-control" id="phone" name="phone" required data-validation-required-message="Please enter your phone number.">
+              <input type="tel" class="form-control" id="phone" name="phone" required data-validation-required-message="Please enter your phone number." value="<?php echo $phone; ?>">
             </div>
           </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Email Address:</label>
-              <input type="email" class="form-control" id="email" name="email" required data-validation-required-message="Please enter your email address.">
+              <input type="email" class="form-control" id="email" name="email" required data-validation-required-message="Please enter your email address." value="<?php echo $email_address; ?>">
             </div>
           </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Message:</label>
-              <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+              <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"><?php echo $message; ?></textarea>
             </div>
           </div>
-          <!--<div id="success"></div>-->
-          <div id="mailmessage" class="alert alert-<?php echo $MailMessageClass ;?>"><?php echo $MailMessage ;?> </div>
-          <!-- For success/fail messages -->
           <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Send Message">
         </form> 
       </div>
