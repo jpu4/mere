@@ -7,6 +7,8 @@ $MailMessage = '';
 $MailMessageClass = '';
 $pagename = 'Contact';
 
+$actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 $name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
 $email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
 $phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
@@ -27,14 +29,16 @@ if($_SESSION["captcha"]==$_POST["captcha"])
     // Create the email and send the message
     
     $subject = "Contact Form Submitted by:  $name";
+    
     $body="<p>You have received a new message from your website contact form.</p>\n\n <p>Here are the details:</p>\n\n";
-
     foreach ($_POST as $key => $value){
       if (!contains('captcha',$key) && (!contains('btnSubmit',$key))){
         $body .= "<p>" . ucwords($key) . ": " . ucwords(strip_tags(htmlspecialchars($value))) . "</p>\n\n";
       }
     };
-    echo $body;
+
+    $body .= "<p>Sent from " . $actual_url . "</p>\n\n";
+
     $MailMessage = mailto($subject,$body);
     if (contains('Error',$MailMessage)){
       $MailMessageClass = 'danger';
