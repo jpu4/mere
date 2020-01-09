@@ -11,7 +11,7 @@ class config {
     public static ?string $Env = 'dev';
     // SITE
     public static ?string $Site_Name = 'A Mere site';
-    public static ?string $Site_Author = 'James Ussery';
+    public static ?string $Site_Author = 'Site Author';
     public static ?string $Site_Descr = 'A Mere site';
     public static ?string $Site_Baseurl = 'http://mere.site';
     public static ?string $DateTime_Format = 'Y-m-d H:i:s';         //date('Y-m-d H:i:s')
@@ -32,12 +32,12 @@ class config {
     public static ?string $DIR_Images = '/assets';
     public static ?string $DIR_Composer = '/vendor';
     // MAIL
-    public static ?string $Mail_Type = 'smtp';
+    public static ?string $Mail_Type = '';
     public static ?string $Mail_Host = '';
-    public static ?string $Mail_Port = '';
+    public static ?string $Mail_Port = '587';
     public static ?string $Mail_Username = '';
     public static ?string $Mail_Password = '';
-    public static ?string $Mail_SendTo = 'emailme@domain.com';
+    public static ?string $Mail_SendTo = 'emailto@domain.com';
     public static ?string $Mail_Sendfrom = 'contactform@domain.com';
     public static ?string $Mail_Supportemail = 'support@domain.com';
     // BACKUP

@@ -1,40 +1,46 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/config/config.php';
+require_once './config/init.php';
+
 session_start(); // used for captcha
 $config = new config;
 $MailMessage = '';
 $MailMessageClass = '';
 $pagename = 'Contact';
 
-$sent = isset($_POST['sent']) ? $_POST['sent'] : null;
 $name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
 $email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
 $phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
 $message = (isset($_POST['message']) ? strip_tags(htmlspecialchars($_POST['message'])) : null);
+$emailIsValid = filter_var($email_address,FILTER_VALIDATE_EMAIL);
 
-//if($sent){
-  
 if(isset($_POST["captcha"]))  
 if($_SESSION["captcha"]==$_POST["captcha"])  
 {  
   
-  if (empty($email_address)){
+  if (empty($email_address) || (!$emailIsValid)){
 
-    $MailMessage = 'Email address is required.';
+    $MailMessage = "Email address is required. Check that it's entered correctly.";
     $MailMessageClass = 'danger';
 
   } else {
 
     // Create the email and send the message
-    $to =  $config::$Mail_SendTo; // Add your email address
-    $email_subject = "Contact Form Submitted by:  $name";
-    $email_body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email_address\n\nPhone: $phone\n\nMessage:\n$message";
-    $headers = "From: ". $config::$Mail_Sendfrom . "\n"; // This is the email address the message will be from. 
-    $headers .= "Reply-To: " . $config::$Mail_SendTo;   
-    mail($to,$email_subject,$email_body,$headers);
+    
+    $subject = "Contact Form Submitted by:  $name";
+    $body="<p>You have received a new message from your website contact form.</p>\n\n <p>Here are the details:</p>\n\n";
 
-    $MailMessage = 'Mail Sent. Thank you.';
-    $MailMessageClass = 'success';
+    foreach ($_POST as $key => $value){
+      if (!contains('captcha',$key) && (!contains('btnSubmit',$key))){
+        $body .= "<p>" . ucwords($key) . ": " . ucwords(strip_tags(htmlspecialchars($value))) . "</p>\n\n";
+      }
+    };
+    echo $body;
+    $MailMessage = mailto($subject,$body);
+    if (contains('Error',$MailMessage)){
+      $MailMessageClass = 'danger';
+    } else {
+      $MailMessageClass = 'success';
+    };
   }
 } else {  
 
@@ -140,7 +146,6 @@ if($_SESSION["captcha"]==$_POST["captcha"])
       <div class="col-lg-8 mb-4">
         <h3>Send us a Message</h3>
         <form name="contactForm" id="contactForm" method="POST" action="contact.php" novalidate>
-          <input type="hidden" name="sent" value="1" />
           <!-- For success/fail messages -->
           <div id="mailmessage" class="alert alert-<?php echo $MailMessageClass ;?>"><?php echo $MailMessage ;?> </div>
           <div class="control-group form-group">
@@ -153,7 +158,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
           <div class="control-group form-group">
             <div class="controls">
               <label>Phone Number:</label>
-              <input type="tel" class="form-control" id="phone" name="phone" required data-validation-required-message="Please enter your phone number." value="<?php echo $phone; ?>">
+              <input type="tel" class="form-control" id="phone" name="phone" data-validation-required-message="Please enter your phone number." value="<?php echo $phone; ?>">
             </div>
           </div>
           <div class="control-group form-group">
@@ -165,7 +170,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
           <div class="control-group form-group">
             <div class="controls">
               <label>Message:</label>
-              <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"><?php echo $message; ?></textarea>
+              <textarea rows="10" cols="100" class="form-control" id="message" name="message" data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"><?php echo $message; ?></textarea>
             </div>
           </div>
           <div class="form-group">

@@ -21,8 +21,9 @@ composer.phar
 # Ignore all local history of files
 .history
 
-### ThemeTMP ###
+### Mere ###
 # Using this folder to store template files not yet processed.
 /theme-tmp/
+/config/config.php
 
 # End of https://www.gitignore.io/api/composer,visualstudiocode

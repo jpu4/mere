@@ -1,5 +1,5 @@
 <?php
-
+echo "<!--router loaded-->\n\n";
 // Load Twig Environment
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
