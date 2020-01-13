@@ -11,26 +11,23 @@ function mailto($subject='',$message) {
     $config = new config;
     $mail = new PHPMailer;
     
-    if ($config::$Mail_Type === "SMTP") {
-        //Enable SMTP debugging
-        // SMTP::DEBUG_OFF = off (for production use)
-        // SMTP::DEBUG_CLIENT = client messages
-        // SMTP::DEBUG_SERVER = client and server messages
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-        //Set the hostname of the mail server
-        $mail->Host = $config::$Mail_Host;
-        //Set the SMTP port number - likely to be 25, 465 or 587
-        $mail->Port = $config::$Mail_Port;
-        //Whether to use SMTP authentication
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'tls';
-        //Username to use for SMTP authentication
-        $mail->Username = $config::$Mail_Username;
-        //Password to use for SMTP authentication
-        $mail->Password = $config::$Mail_Password;
-    } else {
-        $mail->isSendmail();
-    }
+    //Enable SMTP debugging
+    // SMTP::DEBUG_OFF = off (for production use)
+    // SMTP::DEBUG_CLIENT = client messages
+    // SMTP::DEBUG_SERVER = client and server messages
+    $mail->isSMTP();
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    //Set the hostname of the mail server
+    $mail->Host = $config::$Mail_Host;
+    //Set the SMTP port number - likely to be 25, 465 or 587
+    $mail->Port = $config::$Mail_Port;
+    //Whether to use SMTP authentication
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    //Username to use for SMTP authentication
+    $mail->Username = $config::$Mail_Username;
+    //Password to use for SMTP authentication
+    $mail->Password = $config::$Mail_Password;
     
     $mail->setFrom($config::$Mail_Sendfrom);
     //$mail->addReplyTo('replyto@example.com', 'First Last');
@@ -57,34 +54,5 @@ function mailto($subject='',$message) {
     return $statusMsg;
 } 
 
-/* 
-$errors = "";
-$admin = "josecerejo@sapo.pt"; 
-
-if ($this->nome == "") {
-    $errors .= '- You forgot to enter a name!<br />';
-}
-
-    if ($this->email == "") {
-    $errors .= '- You forgot to enter an email!<br />';
-}
-
-    if ($this->assunto == "") {
-    $errors .= '- You forgot to enter a assunto!<br />';
-}
-
-    if ($this->mensagem == "") {
-    $errors .= '- You forgot to enter a mensagem!<br />';
-}
-
-if(empty($errors)) {
-$headers = "From: ".$this->nome." <".$this->email.">";
-$send_contact=mail("$this->admin","$this->assunto","$this->mensagem","$headers");
-exit();
-} else {
-    echo '<p class=\'message error\'>';
-    echo '<font color="black">' . $errors . '</font>';
-    echo '</p><br />';
-} */
 
 ?>

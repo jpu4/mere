@@ -1,4 +1,57 @@
-<?php session_start() ?> 
+<?php 
+session_start();
+require_once './config/init.php';
+$config = new config;
+
+$MailMessage = '';
+$MailMessageClass = '';
+$pagename = 'Contact';
+
+$actual_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+$name = (isset($_POST['name']) ? strip_tags(htmlspecialchars($_POST['name'])) : null);
+$email_address = (isset($_POST['email']) ? strip_tags(htmlspecialchars($_POST['email'])) : null);
+$phone = (isset($_POST['phone']) ? strip_tags(htmlspecialchars($_POST['phone'])) : null);
+$message = (isset($_POST['message']) ? strip_tags(htmlspecialchars($_POST['message'])) : null);
+$emailIsValid = filter_var($email_address,FILTER_VALIDATE_EMAIL);
+
+if(isset($_POST["captcha"]))  
+if($_SESSION["captcha"]==$_POST["captcha"])  
+{  
+  
+  if (empty($email_address) || (!$emailIsValid)){
+
+    $MailMessage = "Email address is required. Check that it's entered correctly.";
+    $MailMessageClass = 'danger';
+
+  } else {
+
+    // Create the email and send the message
+    
+    $subject = "Contact Form Submitted by:  $name";
+    
+    $body="<p>You have received a new message from your website contact form.</p>\n\n <p>Here are the details:</p>\n\n";
+    foreach ($_POST as $key => $value){
+      if (!contains('captcha',$key) && (!contains('btnSubmit',$key))){
+        $body .= "<p>" . ucwords($key) . ": " . ucwords(strip_tags(htmlspecialchars($value))) . "</p>\n\n";
+      }
+    };
+
+    $body .= "<p>Sent from " . $actual_url . "</p>\n\n";
+
+    $MailMessage = mailto($subject,$body);
+    if (contains('Error',$MailMessage)){
+      $MailMessageClass = 'danger';
+    } else {
+      $MailMessageClass = 'success';
+    };
+  }
+} else {  
+
+    $MailMessage = 'CAPTCHA Required. (Spam is no fun)';
+    $MailMessageClass = 'danger';
+} 
+?> 
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
@@ -84,7 +137,7 @@
 	<meta name="generator"
 		content="Powered by LayerSlider 6.9.2 - Multi-Purpose, Responsive, Parallax, Mobile-Friendly Slider Plugin for WordPress." />
 	<!-- LayerSlider updates and docs at: https://layerslider.kreaturamedia.com -->
-	<meta name="generator" content="WordPress 5.3" />
+	<meta name="generator" content="Mere v1" />
 	<link rel="canonical" href="http://nobullmgt.com/" />
 	<link rel='shortlink' href='http://nobullmgt.com/' />
 
@@ -119,7 +172,7 @@
 				<div class="logo-wrapper">
 					<h1><a href="http://nobullmgt.com"><img src="/assets/img/Logo2.png" alt="" /></a></h1>
 				</div>
-				<div class="logo-right-text"><a href="Tel: {{ owner_phone1 }}"><i class="fa fa-phone"></i> {{ owner_phone1 }}</a> <br />
+				<div class="logo-right-text"><a href="Tel: <?php echo $config::$Owner_Phone; ?>"><i class="fa fa-phone"></i> <?php echo $config::$Owner_Phone; ?></a> <br />
 					<a href="mailto:Mike@nobullmgt.com"><i class="fa fa-envelope-o"></i> Mike@nobullmgt.com</a><br />
 				</div>
 				<!-- Navigation -->
@@ -192,7 +245,7 @@
 							</ul>
 						</div>
 					</div>
-					<!-- search form -->
+					<!-- search form 
 					<div class="top-search-form">
 						<div class="gdl-search-button" id="gdl-search-button"></div>
 						<div class="search-wrapper">
@@ -207,7 +260,7 @@
 								</form>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					<div class="clear"></div>
 				</div>
 			</div> <!-- header wrapper container -->
@@ -215,17 +268,104 @@
 			<div class="navigation-bottom-bar container wrapper"></div>
 		</div> <!-- header wrapper container wrapper -->
 		<div class="page-header-wrapper container wrapper">
-  <!-- Page Content -->
-  <div class="container">
-    {% block content %}
-    {% endblock %}
-  </div>
-  <!-- /.container -->
-    <!-- content end-->
 
-  </div>
-  <!-- end page content -->
 
+<div class="page-header-container container">
+	<div class="gdl-header-wrapper">
+		<h1 class="gdl-header-title">Contact Us</h1>
+	</div>
+</div>
+</div>
+<div class="content-outer-wrapper container wrapper">
+	<div class="top-slider-bottom-bar container wrapper"></div>
+	<div class="content-wrapper container main">
+		<div class="page-wrapper single-page ">
+			<div class="row">
+				<div class="gdl-page-left mb0 twelve columns">
+					<div class="row">
+						<div class="gdl-page-item mb20 twelve columns">
+							<div class="row">
+								<div class="twelve columns mb0">
+									<div class="gdl-page-content"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="six columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Send Us a Message</h3>
+									</div>
+									<div class="gdl-column-item">
+										<div class="Contact-page-form">
+												<div class="screen-reader-response"></div>
+												<!-- Display submission status -->
+												<!-- For success/fail messages -->
+          <div id="mailmessage" class="alert alert-<?php echo $MailMessageClass ;?>"><?php echo $MailMessage ;?> </div>
+
+												<form method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    												<input type="text" id="name" placeholder="name" name="name"  aria-required="true" size="40" class="formfield" required pattern="[A-Za-z-0-9]+\s[A-Za-z-'0-9]+" title="firstname lastname" />
+    												<input type="email" id="email" placeholder="email" name="email" aria-required="true" size="40" class="formfield" required />
+    												<input type="tel" id="phone" placeholder="phone" name="phone" size="40" class="formfield" />
+													<textarea id="message" placeholder="message" name="message" rows="10" class="formfield"></textarea>
+													<!--<input type="file" id="attachment" name="attachment" placeholder="attachment" accept=".jpg,.jpeg,.png,.pdf" />-->
+													<div>
+														<label for="pwd">Anti Spam code, Please Enter 3 Black Symbols</label>
+    												<img src="/assets/captcha/captcha.php" alt="captcha image" style="height:40px;">
+													<input type="text" name="captcha" size="3″ maxlength="3″ class="formfield" aria-required="true" aria-invalid="false" required /></div>
+													  <!--<button name="submit" onclick="form.submit();">Submit</button>-->
+													  
+          <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Send Message">
+												</form>
+
+										</div>
+									</div>
+								</div>
+								<div class="six columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Address </h3>
+									</div>
+									<div class="gdl-column-item"><strong>No Bull Professional Services LLC </strong>
+										<br>
+										Hours of Operation 9am – 4pm Monday - Friday <br>
+										24 / 7 For Qualifying Emergency Services <br><br>
+
+										Headquarters: 2015 Gus Kaplan Dr.<br>
+										Alexandria, LA. 71301<br><br>
+
+										<strong>Correspondence: </strong><br>
+										PO Box 6972 Alexandria, Louisiana 71307-6972 <br><br>
+
+										<strong>Site Supervisor Michael Schopp </strong><br>
+										Phone : <a href="Tel:(318) 709-1115">(318) 709-1115</a><br>
+										Email : <a href="mailto:Mike@nobullmgt.com">Mike@nobullmgt.com</a>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="twelve columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Our Location</h3>
+									</div>
+									<div class="gdl-column-item"><iframe
+											src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3410.0118162943063!2d-92.47170317249146!3d31.275768365596612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x863ab52568310251%3A0x82c68e3e187e4aac!2s2015+Gus+Kaplan+Dr%2C+Alexandria%2C+LA+71301%2C+USA!5e0!3m2!1sen!2sin!4v1440051526150"
+											width="100%" height="250" frameborder="0" style="border:0"
+											allowfullscreen></iframe></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div> <!-- page wrapper -->
+	</div> <!-- content wrapper -->
+
+	
+	
   <!-- Footer -->
   <div class="footer-wrapper container wrapper">
     <div class="footer-top-bar"></div>
@@ -372,17 +512,6 @@
         if (this.value != '') window.location.href = this.value;
       }
   </script>
-  <script type='text/javascript'>
-    /* <![CDATA[ */
-    var wpcf7 = {
-      "apiSettings": {
-        "root": "http:\/\/nobullmgt.com\/wp-json\/contact-form-7\/v1",
-        "namespace": "contact-form-7\/v1"
-      }
-    };
-    /* ]]> */
-  </script>
-  <script type='text/javascript' src='assets/js/cf7-scripts.js?ver=5.1.6'></script>
   <script type='text/javascript' src='assets/js/superfish.js?ver=1.0'>
   </script>
   <script type='text/javascript' src='assets/js/supersub.js?ver=1.0'>

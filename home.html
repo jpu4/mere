@@ -1,195 +1,213 @@
 {% extends "base.twig" %}
 
-{% block slider %}
-<!-- SLIDER -->
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner" role="listbox">
-        <!-- Slide One - Set the background image for this slide in the line below -->
-        <div class="carousel-item active" style="background-image: url('http://placehold.it/1900x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>First Slide</h3>
-            <p>This is a description for the first slide.</p>
-          </div>
-        </div>
-        <!-- Slide Two - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Second Slide</h3>
-            <p>This is a description for the second slide.</p>
-          </div>
-        </div>
-        <!-- Slide Three - Set the background image for this slide in the line below -->
-        <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Third Slide</h3>
-            <p>This is a description for the third slide.</p>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  {% endblock slider %}
-
   {% block content %}
 
-    <h1 class="my-4">Welcome to Modern Business</h1>
-
-    <!-- Marketing Icons Section -->
-    <div class="row">
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis ipsam eos, nam perspiciatis natus commodi similique totam consectetur praesentium molestiae atque exercitationem ut consequuntur, sed eveniet, magni nostrum sint fuga.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mb-4">
-        <div class="card h-100">
-          <h4 class="card-header">Card Title</h4>
-          <div class="card-body">
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Learn More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Portfolio Section -->
-    <h2>Portfolio Heading</h2>
-
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project One</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Two</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Three</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Four</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Five</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project Six</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque earum nostrum suscipit ducimus nihil provident, perferendis rem illo, voluptate atque, sit eius in voluptates, nemo repellat fugiat excepturi! Nemo, esse.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-
-    <!-- Features Section -->
-    <div class="row">
-      <div class="col-lg-6">
-        <h2>Modern Business Features</h2>
-        <p>The Modern Business template by Start Bootstrap includes:</p>
-        <ul>
-          <li>
-            <strong>Bootstrap v4</strong>
-          </li>
-          <li>jQuery</li>
-          <li>Font Awesome</li>
-          <li>Working contact form with validation</li>
-          <li>Unstyled page elements for easy customization</li>
-        </ul>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-      </div>
-      <div class="col-lg-6">
-        <img class="img-fluid rounded" src="http://placehold.it/700x450" alt="">
-      </div>
-    </div>
-    <!-- /.row -->
-
-    <hr>
-
-    <!-- Call to Action Section -->
-    <div class="row mb-4">
-      <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-      </div>
-    </div>
-
-
+  
+<div class="page-header-container container">
+	<div class="gdl-header-wrapper">
+		<h1 class="gdl-header-title">Home</h1>
+	</div>
+</div>
+<div class="gdl-top-slider">
+	<div class="gdl-top-layer-slider-wrapper">
+		<script type="text/javascript">
+			var lsjQuery = jQuery;
+			lsjQuery(document).ready(function () {
+				if (typeof lsjQuery.fn.layerSlider == "undefined") {
+					if (window._layerSlider && window._layerSlider.showNotice) {
+						window._layerSlider.showNotice('layerslider_1', 'jquery');
+					}
+				} else {
+					lsjQuery("#layerslider_1").layerSlider({
+						sliderVersion: '',
+						responsiveUnder: 0,
+						layersContainer: 0,
+						hideUnder: 0,
+						hideOver: 100000,
+						pauseOnHover: 'on',
+						skin: 'fullwidth',
+						skinsPath: '{{ site.baseurl }}/assets/js/layerslider/static/layerslider/skins/',
+						type: 'responsive',
+						showCircleTimer: false
+					});
+				}
+			});
+		</script>
+		<div id="layerslider_1" class="ls-wp-container fitvidsignore"
+			style="width:600px;height:250px;margin:0 auto;margin-bottom: 0px;">
+			<div class="ls-slide" data-ls="duration:4000;"><img width="1000" height="417"
+					src="/assets/img/bann1.jpg" class="ls-bg" alt=""
+					srcset="/assets/img/bann1.jpg 1000w, /img/bann1-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" /><img width="1000" height="417"
+					src="/assets/img/bann1.jpg" class="ls-tn" alt=""
+					srcset="/assets/img/bann1.jpg 1000w, /img/bann1-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" />
+				<h3 style="padding-top:15px;padding-right:15px;padding-bottom:15px;padding-left:15px;font-family: Open Sans;;color:#B52A18;background:rgba(255, 245, 245, 0.81);top:75px;left:78px;"
+					class="ls-l" data-ls="offsetxin:80;offsetxout:-80;durationout:400;parallaxlevel:0;">We are <br>
+					• Licensed <br>
+					• Bonded <br>
+					• Insured
+				</h3>
+			</div>
+			<div class="ls-slide" data-ls="duration:4000;"><img width="1000" height="417"
+					src="/assets/img/bann3.jpg" class="ls-bg" alt=""
+					srcset="/assets/img/bann3.jpg 1000w, /img/bann3-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" /><img width="1000" height="417"
+					src="/assets/img/bann3.jpg" class="ls-tn" alt=""
+					srcset="/assets/img/bann3.jpg 1000w, /img/bann3-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" />
+				<h3 style="padding-top:15px;padding-right:15px;padding-bottom:15px;padding-left:15px;color:#B52A18;background:rgba(255, 245, 245, 0.81);top:75px;left:78px;"
+					class="ls-l" data-ls="offsetxin:80;offsetxout:-80;durationout:400;parallaxlevel:0;">We are <br>
+					• Licensed <br>
+					• Bonded <br>
+					• Insured </h3>
+			</div>
+			<div class="ls-slide" data-ls="duration:4000;"><img width="1000" height="417"
+					src="/assets/img/bann2.jpg" class="ls-bg" alt=""
+					srcset="/assets/img/bann2.jpg 1000w, /img/bann2-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" /><img width="1000" height="417"
+					src="/assets/img/bann2.jpg" class="ls-tn" alt=""
+					srcset="/assets/img/bann2.jpg 1000w, /img/bann2-300x125.jpg 300w"
+					sizes="(max-width: 1000px) 100vw, 1000px" />
+				<div style="padding-top:15px;padding-right:15px;padding-bottom:15px;padding-left:15px;color:#B52A18;background:rgba(255, 245, 245, 0.81);top:75px;left:78px;"
+					class="ls-l" data-ls="offsetxin:80;offsetxout:-80;durationout:400;parallaxlevel:0;">We are <br>
+					• Licensed <br>
+					• Bonded <br>
+					• Insured </div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+</div>
+<div class="content-outer-wrapper container wrapper">
+	<div class="top-slider-bottom-bar container wrapper"></div>
+	<div class="content-wrapper container main">
+		<div class="page-wrapper single-page ">
+			<div class="row">
+				<div class="gdl-page-left mb0 twelve columns">
+					<div class="row">
+						<div class="gdl-page-item mb20 twelve columns">
+							<div class="row">
+								<div class="twelve columns mb0">
+									<div class="gdl-page-content"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="six columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Carpet Cleaning</h3>
+									</div>
+									<div class="gdl-column-item"><img
+											src="/assets/img/home-clining.jpg" />
+										<ul class="cleaning-services">
+											<li>High Pressure Hot Water Extraction Systems </li>
+											<li>Water Extraction / Restoration </li>
+											<li>24 Hr Availability Emergency Only </li>
+										</ul>
+										<a style="" class="gdl-button large" target="_self"
+											href="/carpet-cleaning/">More..</a>
+									</div>
+								</div>
+								<div class="six columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Cleaning Services</h3>
+									</div>
+									<div class="gdl-column-item"><img
+											src="/assets/img/home-clining1.jpg" />
+										<ul class="cleaning-services">
+											<li> Commercial & Residential </li>
+											<li> Scheduled Cleaning </li>
+											<li> New Construction / Renovation Clean-up </li>
+										</ul>
+										<a style="" class="gdl-button large" target="_self"
+											href="/cleaning-services/">More..</a>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="twelve columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Testimonial</h3>
+									</div>
+									<div class="gdl-carousel-testimonial">
+										<div class="testimonial-navigation">
+											<div class="testimonial-prev"></div>
+											<div class="testimonial-next"></div>
+										</div>
+										<div class="testimonial-item-wrapper">
+											<div class="testimonial-item">
+												<div class="testimonial-content">They are simply the best! I've been a
+													competitor and coach for over 30 years and I know a champion when I
+													see one. I give No Bull Commercial Cleaners a Gold Medal!</div>
+												<div class="testimonial-info"><span class="testimonial-author">- Former
+														Olympian &#038; World</span></div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="twelve columns ">
+									<div class="gdl-column-item"></div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="row">
+								<div class="twelve columns ">
+									<div class="gdl-item-header-wrapper">
+										<h3 class="gdl-item-header-title">Gallery</h3>
+									</div>
+									<div class="gdl-gallery-item">
+										<div class="row">
+											<div class="three columns mb20">
+												<div class="gdl-gallery-image"><a data-rel="fancybox"
+														data-fancybox-group="gal0"
+														href="/assets/img/cleaning_services.jpg"
+														title=""><img
+															src="/assets/img/cleaning_services-400x400.jpg"
+															alt="" /></a></div>
+											</div>
+											<div class="three columns mb20">
+												<div class="gdl-gallery-image"><a data-rel="fancybox"
+														data-fancybox-group="gal0"
+														href="/assets/img/w-wincleaning.jpg"
+														title=""><img
+															src="/assets/img/w-wincleaning-400x400.jpg"
+															alt="" /></a></div>
+											</div>
+											<div class="three columns mb20">
+												<div class="gdl-gallery-image"><a data-rel="fancybox"
+														data-fancybox-group="gal0"
+														href="/assets/img/home-clining1.jpg"
+														title=""><img
+															src="/assets/img/home-clining1-400x400.jpg"
+															alt="" /></a></div>
+											</div>
+											<div class="three columns mb20">
+												<div class="gdl-gallery-image"><a data-rel="fancybox"
+														data-fancybox-group="gal0"
+														href="/assets/img/home-clining.jpg"
+														title=""><img
+															src="/assets/img/home-clining-400x400.jpg"
+															alt="" /></a></div>
+											</div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="clear"></div>
+		</div> <!-- page wrapper -->
+	</div> <!-- content wrapper -->
   {% endblock %}

@@ -70,7 +70,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="assets/css/modern-business.css" rel="stylesheet">
+  <link href="/assets/css/modern-business.css" rel="stylesheet">
 
 </head>
 
@@ -80,7 +80,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
 <header>
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="/"><img src="assets/images/logo.jpg" alt="logo" style="width:20%;margin-right:5px;" /><?php echo $config::$Site_Name;?></a>
+      <a class="navbar-brand" href="/"><img src="/assets/img/logo.jpg" alt="logo" style="width:20%;margin-right:5px;" /><?php echo $config::$Site_Name;?></a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -179,7 +179,7 @@ if($_SESSION["captcha"]==$_POST["captcha"])
           </div>
           <div class="form-group">
           <div class="col-sm-8 pull-left"><label for="pwd">Anti Spam code, Please Enter 3 Black Symbols</label>
-          <img src="assets/captcha/captcha.php" alt="captcha image" style="width:100px;"></div>
+          <img src="/assets/captcha/captcha.php" alt="captcha image" style="width:100px;"></div>
           <div class="col-sm-4 pull-right"><input type="text" name="captcha" size="3″ maxlength="3″ class="form-control"></div>
           </div>
           <input type="submit" class="btn btn-primary" id="btnSubmit" name="btnSubmit" value="Send Message">
