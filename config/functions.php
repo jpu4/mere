@@ -11,23 +11,26 @@ function mailto($subject='',$message) {
     $config = new config;
     $mail = new PHPMailer;
     
-    //Enable SMTP debugging
-    // SMTP::DEBUG_OFF = off (for production use)
-    // SMTP::DEBUG_CLIENT = client messages
-    // SMTP::DEBUG_SERVER = client and server messages
-    $mail->isSMTP();
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    //Set the hostname of the mail server
-    $mail->Host = $config::$Mail_Host;
-    //Set the SMTP port number - likely to be 25, 465 or 587
-    $mail->Port = $config::$Mail_Port;
-    //Whether to use SMTP authentication
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'tls';
-    //Username to use for SMTP authentication
-    $mail->Username = $config::$Mail_Username;
-    //Password to use for SMTP authentication
-    $mail->Password = $config::$Mail_Password;
+    if ($config::$Mail_Type === "SMTP") {
+        //Enable SMTP debugging
+        // SMTP::DEBUG_OFF = off (for production use)
+        // SMTP::DEBUG_CLIENT = client messages
+        // SMTP::DEBUG_SERVER = client and server messages
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        //Set the hostname of the mail server
+        $mail->Host = $config::$Mail_Host;
+        //Set the SMTP port number - likely to be 25, 465 or 587
+        $mail->Port = $config::$Mail_Port;
+        //Whether to use SMTP authentication
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+        //Username to use for SMTP authentication
+        $mail->Username = $config::$Mail_Username;
+        //Password to use for SMTP authentication
+        $mail->Password = $config::$Mail_Password;
+    } else {
+        $mail->isSendmail();
+    }
     
     $mail->setFrom($config::$Mail_Sendfrom);
     //$mail->addReplyTo('replyto@example.com', 'First Last');
