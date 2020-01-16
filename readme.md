@@ -20,8 +20,8 @@ composer install
 
 Includes: 
 
-* twig - WIP
-* phpmailer - TODO
+* twig
+* phpmailer
 * michelf/php-markdown - TODO
 
 
